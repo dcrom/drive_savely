@@ -37,7 +37,7 @@ import android.support.v7.app.ActionBarActivity;
             }
 
             else{
-                System.out.println("Efficient drive");
+                System.out.println("Very Efficient drive");
             }
         }
 
