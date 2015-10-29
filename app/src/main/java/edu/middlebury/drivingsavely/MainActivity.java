@@ -1,6 +1,8 @@
 package edu.middlebury.drivingsavely;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.activity_main);
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
 
@@ -35,13 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
     //    Runs after user clicks 'Start Trip', begins new activity 'Drive'
     public void createTrip(View view){
-        Drive trip1 = new Drive();
-        trip1.SensorActivity();
+        //Drive trip1
+        //trip1.sensorActivity();
 
         Intent intent = new Intent(this, drive_over.class);
         startActivity(intent);
 
     }
+
+
 
 
     @Override

@@ -11,17 +11,22 @@ import android.hardware.SensorManager;
  */
 public class Drive extends MainActivity implements SensorEventListener{
 
-    private SensorManager mSensorManager;
-    private Sensor mSensor;
+    public SensorManager mSensorManager;
+    public Sensor mSensor;
+    public Context context;
+    //private final Context context;
+
 
     double xSum, ySum, zSum = 0.0;
     double xAvg, yAvg, zAvg = 0.0;
 
     int count = 0;
 
-    public void SensorActivity() {
-        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+
+    public void sensorActivity() {
+        mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
     }
 
 

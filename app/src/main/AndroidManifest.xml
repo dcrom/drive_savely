@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.middlebury.drivingsavely" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,10 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".drive_over"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="36bef95b404b83a4c987e90c302583ab727cddd5" />
+
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
