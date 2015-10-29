@@ -8,6 +8,6 @@ public class drive_over extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drive_over);
+        setContentView(R.layout.drive_over);
     }
 }
