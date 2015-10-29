@@ -32,7 +32,7 @@ public class Drive extends MainActivity implements SensorEventListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
-        setContentView(R.layout.drive_over);
+        setContentView(R.layout.drive);
     }
 
     public void sensorActivity() {

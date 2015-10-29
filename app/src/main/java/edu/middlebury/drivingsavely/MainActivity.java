@@ -38,10 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     //    Runs after user clicks 'Start Trip', begins new activity 'Drive'
     public void createTrip(View view){
-        //Drive trip1
-        //trip1.sensorActivity();
 
-        Intent intent = new Intent(this, drive_over.class);
+        Intent intent = new Intent(this, Drive.class);
         startActivity(intent);
 
     }
