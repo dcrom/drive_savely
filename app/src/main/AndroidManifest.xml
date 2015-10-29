@@ -21,9 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".drive"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+
+
         <activity
             android:name=".drive_over"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".drive" >
         </activity>
 
         <meta-data
