@@ -6,6 +6,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.AbsListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
@@ -33,6 +36,12 @@ public class Drive extends MainActivity implements SensorEventListener{
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.drive);
+       /* TextView dynamicTextView = new TextView(this);
+        dynamicTextView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.WRAP_CONTENT, AbsListView.LayoutParams.WRAP_CONTENT));
+        dynamicTextView.setText(" Hello World ");
+        LinearLayout mainlayout = (LinearLayout) findViewById(R.layout.drive."mainlayout"");
+        mainlayout.addView(dynamicTextView);*/
+
     }
 
     public void sensorActivity() {
@@ -71,6 +80,8 @@ public class Drive extends MainActivity implements SensorEventListener{
         yAvg = ySum/count;
         zAvg = zSum/count;
 
+        TextView screenText = (TextView) findViewById(R.id.textView4);
+        screenText.setText((int) xAvg);
     }
 
     @Override
