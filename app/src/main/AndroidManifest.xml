@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".drive"
+            android:name=".Drive"
             android:parentActivityName=".MainActivity" >
         </activity>
 
