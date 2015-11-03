@@ -80,8 +80,8 @@ public class Drive extends MainActivity implements SensorEventListener{
         yAvg = ySum/count;
         zAvg = zSum/count;
 
-        //TextView screenText = (TextView) findViewById(R.id.textView4);
-        //screenText.setText((int) xAvg);
+        TextView screenText = (TextView) findViewById(R.id.textView4);
+        screenText.setText((int) event.values[0]);
     }
 
     @Override
