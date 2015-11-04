@@ -41,6 +41,7 @@ public class Drive extends MainActivity implements SensorEventListener{
         dynamicTextView.setText(" Hello World ");
         LinearLayout mainlayout = (LinearLayout) findViewById(R.layout.drive."mainlayout"");
         mainlayout.addView(dynamicTextView);*/
+        sensorActivity();
 
     }
 
@@ -65,6 +66,7 @@ public class Drive extends MainActivity implements SensorEventListener{
         else{
             System.out.println("Efficient drive");
         }
+
     }
 
     @Override
