@@ -72,7 +72,7 @@ public class Drive extends MainActivity implements SensorEventListener{
     }
 
     public void endTrip(View view){
-        Intent intent = new Intent(this, Drive.class);
+        Intent intent = new Intent(this, drive_over.class);
         startActivity(intent);
     }
 
