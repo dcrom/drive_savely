@@ -1,11 +1,13 @@
 package edu.middlebury.drivingsavely;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -67,6 +69,11 @@ public class Drive extends MainActivity implements SensorEventListener{
             System.out.println("Efficient drive");
         }
 
+    }
+
+    public void endTrip(View view){
+        Intent intent = new Intent(this, Drive.class);
+        startActivity(intent);
     }
 
     @Override
