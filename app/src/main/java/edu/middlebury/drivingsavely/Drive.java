@@ -1,11 +1,13 @@
 package edu.middlebury.drivingsavely;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,7 +43,7 @@ public class Drive extends MainActivity implements SensorEventListener{
         dynamicTextView.setText(" Hello World ");
         LinearLayout mainlayout = (LinearLayout) findViewById(R.layout.drive."mainlayout"");
         mainlayout.addView(dynamicTextView);*/
-
+        sensorActivity();
     }
 
     public void sensorActivity() {
@@ -49,7 +51,6 @@ public class Drive extends MainActivity implements SensorEventListener{
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
     }
-
 
     public void evaluateDrive(){
 
@@ -65,6 +66,11 @@ public class Drive extends MainActivity implements SensorEventListener{
         else{
             System.out.println("Efficient drive");
         }
+    }
+
+    public void endTrip(View view){
+        Intent intent = new Intent(this, drive_over.class);
+        startActivity(intent);
     }
 
     @Override
