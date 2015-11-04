@@ -54,25 +54,13 @@ public class Drive extends MainActivity implements SensorEventListener{
     }
 
 
-    public void evaluateDrive(){
 
-
-        if (Math.abs(xAvg) >= 8.0){
-            System.out.println("Inefficient drive");
-        }
-
-        else if (Math.abs(xAvg) >= 4.0){
-            System.out.println("Less Inefficient drive");
-        }
-
-        else{
-            System.out.println("Efficient drive");
-        }
-
-    }
 
     public void endTrip(View view){
         Intent intent = new Intent(this, drive_over.class);
+        intent.putExtra("xAvg", xAvg);
+        intent.putExtra("yAvg", yAvg);
+        intent.putExtra("zAvg", zAvg);
         startActivity(intent);
     }
 
