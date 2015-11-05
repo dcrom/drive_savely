@@ -1,11 +1,13 @@
 package edu.middlebury.drivingsavely;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -33,6 +35,8 @@ public class Drive extends MainActivity implements SensorEventListener{
 
     int count = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +48,25 @@ public class Drive extends MainActivity implements SensorEventListener{
         LinearLayout mainlayout = (LinearLayout) findViewById(R.layout.drive."mainlayout"");
         mainlayout.addView(dynamicTextView);*/
         sensorActivity();
+        /*
+        TextView screenText = (TextView) findViewById(R.id.textView4);
+
+        Boolean bool =mSensor.isWakeUpSensor();
+        if (bool){
+            screenText.setText("Yes");
+        }
+
+*/
 
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mSensorManager.registerListener(this,mSensor,mSensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
 
     public void sensorActivity() {
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
@@ -78,7 +99,7 @@ public class Drive extends MainActivity implements SensorEventListener{
         zAvg = zSum/count;
 
         TextView screenText = (TextView) findViewById(R.id.textView4);
-        screenText.setText((int) event.values[0]);
+        screenText.setText(String.valueOf(xAvg));
     }
 
     @Override
