@@ -22,11 +22,11 @@ public class drive_over extends AppCompatActivity {
 
         TextView screenText = (TextView) findViewById(R.id.textViewOver);
 
-        if (Math.abs(xAvg) >= 8.0){
+        if (Math.abs(xAvg) >= 6){
             screenText.setText("Shit Drive");
         }
 
-        else if (Math.abs(xAvg) >= 4.0){
+        else if (Math.abs(xAvg) >= 3){
             screenText.setText("Not Bad");
         }
 

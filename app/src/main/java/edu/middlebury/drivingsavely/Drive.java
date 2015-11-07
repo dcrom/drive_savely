@@ -31,7 +31,7 @@ public class Drive extends MainActivity implements SensorEventListener{
 
 
     double xSum, ySum, zSum = 0.0;
-    double xAvg, yAvg, zAvg = 0.0;
+    double xAvg, yAvg, zAvg, totAvg = 0.0;
 
     int count = 0;
 
@@ -70,7 +70,7 @@ public class Drive extends MainActivity implements SensorEventListener{
 
     public void sensorActivity() {
         mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
     }
 
@@ -90,16 +90,38 @@ public class Drive extends MainActivity implements SensorEventListener{
     public void onSensorChanged(SensorEvent event) {
 
         count++;
-        xSum += event.values[0];
-        ySum += event.values[1];
-        zSum += event.values[2];
+        xSum += Math.abs(event.values[0]);
+        ySum += Math.abs(event.values[1]);
+        zSum += Math.abs(event.values[2]);
 
         xAvg = xSum/count;
         yAvg = ySum/count;
         zAvg = zSum/count;
 
+        totAvg = (xAvg+yAvg+zAvg)/3;
+
         TextView screenText = (TextView) findViewById(R.id.textView4);
-        screenText.setText(String.valueOf(xAvg));
+        screenText.setText("Side to side: "+String.valueOf(event.values[0]));
+
+        TextView screenText2 = (TextView) findViewById(R.id.textView5);
+        screenText2.setText("Top to bottom: " + String.valueOf(event.values[1]));
+
+        TextView screenText3 = (TextView) findViewById(R.id.textView6);
+        screenText3.setText("Out and in: "+String.valueOf(event.values[2]));
+
+        TextView screenText4 = (TextView) findViewById(R.id.textView7);
+        screenText4.setText("Side to side AVG: "+String.valueOf(xAvg));
+
+        TextView screenText5 = (TextView) findViewById(R.id.textView8);
+        screenText5.setText("Top to bottom AVG: " + String.valueOf(yAvg));
+
+        TextView screenText6 = (TextView) findViewById(R.id.textView9);
+        screenText6.setText("Out and in AVG: " + String.valueOf(zAvg));
+
+        TextView screenText7 = (TextView) findViewById(R.id.textView10);
+        screenText7.setText("Total AVG: " + String.valueOf(zAvg));
+
+
     }
 
     @Override
