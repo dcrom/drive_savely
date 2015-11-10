@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Custom Theme -->
+    <style name="CustomTheme" parent="@android:style/Theme.Holo">
+        <item name="android:actionBarStyle">@style/customActionBar</item>
+    </style>
+
+
+
+</resources>

@@ -14,4 +14,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- change title background color of custom theme -->
+    <style name="customActionBar" parent="android:Widget.Holo.Light.ActionBar">
+        <item name="android:background">#2C3539</item>
+    </style>
 </resources>
