@@ -1,32 +1,38 @@
 package edu.middlebury.drivingsavely;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by owner on 2015-10-12.
  */
-public class Drive extends MainActivity implements SensorEventListener{
+public class Drive extends MainActivity implements SensorEventListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
 
-    public SensorManager mSensorManager;
-    public Sensor mSensor;
+    public SensorManager mSensorManagerAccel;
+    public Sensor mSensorAccel;
+    public SensorManager mSensorManagerGPS;
+    public Sensor mSensorGPS;
     public Context context;
+    public GoogleApiClient mGoogleApiClient;
+    public Location mLastLocation= null;
+    public int notMoving=1;
     //private final Context context;
 
 
@@ -48,33 +54,34 @@ public class Drive extends MainActivity implements SensorEventListener{
         LinearLayout mainlayout = (LinearLayout) findViewById(R.layout.drive."mainlayout"");
         mainlayout.addView(dynamicTextView);*/
         sensorActivity();
-        /*
-        TextView screenText = (TextView) findViewById(R.id.textView4);
+        buildGoogleApiClient();
+        mGoogleApiClient.connect();
 
-        Boolean bool =mSensor.isWakeUpSensor();
-        if (bool){
-            screenText.setText("Yes");
-        }
 
-*/
 
+    }
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) this)
+                .addApi(LocationServices.API)
+                .build();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        mSensorManager.registerListener(this,mSensor,mSensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManagerAccel.registerListener(this, mSensorAccel, mSensorManagerAccel.SENSOR_DELAY_NORMAL);
 
     }
 
 
     public void sensorActivity() {
-        mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mSensorManagerAccel = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        mSensorAccel = mSensorManagerAccel.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mSensorManagerGPS = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
 
     }
-
-
 
 
     public void endTrip(View view){
@@ -88,8 +95,17 @@ public class Drive extends MainActivity implements SensorEventListener{
     @Override
     //
     public void onSensorChanged(SensorEvent event) {
-
         count++;
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation!=null) {
+            if (true) {
+                TextView screenText = (TextView) findViewById(R.id.textView4);
+                screenText.setText("just got there" + String.valueOf(event.values[0]));
+
+            }
+        }
+
         xSum += Math.abs(event.values[0]);
         ySum += Math.abs(event.values[1]);
         zSum += Math.abs(event.values[2]);
@@ -100,8 +116,7 @@ public class Drive extends MainActivity implements SensorEventListener{
 
         totAvg = (xAvg+yAvg+zAvg)/3;
 
-        TextView screenText = (TextView) findViewById(R.id.textView4);
-        screenText.setText("Side to side: "+String.valueOf(event.values[0]));
+
 
         TextView screenText2 = (TextView) findViewById(R.id.textView5);
         screenText2.setText("Top to bottom: " + String.valueOf(event.values[1]));
@@ -129,5 +144,44 @@ public class Drive extends MainActivity implements SensorEventListener{
     }
 
 
+    @Override
+    public void onConnected(Bundle bundle) {
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
 
+        }
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        TextView screenText7 = (TextView) findViewById(R.id.textView10);
+        screenText7.setText("Location Changed" + String.valueOf(zAvg));
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }
